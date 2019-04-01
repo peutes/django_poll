@@ -6,6 +6,13 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+numpy = "*"
+django = "*"
+black = "==19.3b0"
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+server = "python manage.py runserver"
+ls2 = "ls -lta"
