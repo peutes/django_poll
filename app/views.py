@@ -1,13 +1,28 @@
 from django.db.models import QuerySet
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response, redirect, render
+from django.views import generic
 
 from app.forms import BookForm
 from app.models import Book
 
+# 既存のDjango Viewを使うやり方
+class IndexView(generic.ListView):
+    template_name = "app/book_list.html"
 
+    def get_queryset(self):
+        return Book.objects.all().order_by("id")
+
+
+class DetailView(generic.DetailView):
+    model = Book
+    # template 名も自動で、book_detail.html が選ばれる
+
+
+# 原始的やり方
 def book_list(request):
     books: QuerySet[Book] = Book.objects.all().order_by("id")
-    return render_to_response("app/book_list.html", {"books": books})
+    return render_to_response("app/book_list.html", {"book_list": books})
 
 
 def book_edit(request, book_id=None):
@@ -38,3 +53,7 @@ def book_del(request, book_id):
     book: Book = get_object_or_404(Book, pk=book_id)
     book.delete()
     return redirect("app:book_list")
+
+
+def other(request):
+    return HttpResponse("ただのレスポンス")

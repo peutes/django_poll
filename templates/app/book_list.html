@@ -16,10 +16,10 @@
     </tr>
     </thead>
     <tbody>
-    {% for book in books %}
+    {% for book in book_list %}
       <tr>
         <th scope="row">{{ book.id }}</th>
-        <td>{{ book.name }}</td>
+        <td><a href={% url 'app:book_detail' pk=book.id %}>{{ book.name }}</a></td>
         <td>{{ book.publisher }}</td>
         <td>{{ book.page }}</td>
         <td>
