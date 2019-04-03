@@ -9,10 +9,15 @@ verify_ssl = true
 numpy = "*"
 django = "*"
 black = "==19.3b0"
+django-bootstrap4 = "*"
 
 [requires]
 python_version = "3.7"
 
 [scripts]
 server = "python manage.py runserver"
-ls2 = "ls -lta"
+createsuperuser = "python manage.py createsuperuser"
+makemigrations = "python manage.py makemigrations"
+migrate = "python manage.py migrate"
+dbshell = "python manage.py dbshell"
+black_all = "black *.py"
